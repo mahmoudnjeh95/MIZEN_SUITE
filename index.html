@@ -3,9 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIZEN SUITE — L'ERP qui équilibre votre production</title>
+<title>MIZEN SUITE — L'ERP/MES qui équilibre votre production</title>
+
+<!-- SEO -->
+<meta name="description" content="MIZEN SUITE est la solution ERP/MES qui met en balance charge d'atelier, coût de revient et délai client. Pilotage temps réel, suivi machine, OEE, fiche pièce cyclée et tableaux de bord pour l'industrie de précision.">
+<meta name="keywords" content="ERP, MES, production, décolletage, mécanique de précision, OEE, suivi atelier, fiche pièce, prix de revient, tableau de bord, GPAO">
+<meta name="author" content="MIZEN SUITE">
+<meta name="theme-color" content="#1C2330">
+<link rel="canonical" href="https://www.mizensuite.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="MIZEN SUITE — L'ERP/MES qui équilibre votre production">
+<meta property="og:description" content="Charge d'atelier, coût de revient et délai client sur un seul plateau. Pilotage temps réel pour l'industrie de précision.">
+<meta property="og:image" content="img/abas-erp-kennzahlen-laptop-dashboard-management_png.webp">
+<meta property="og:url" content="https://www.mizensuite.com/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="MIZEN SUITE">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MIZEN SUITE — L'ERP/MES qui équilibre votre production">
+<meta name="twitter:description" content="Charge d'atelier, coût de revient et délai client sur un seul plateau.">
+<meta name="twitter:image" content="img/abas-erp-kennzahlen-laptop-dashboard-management_png.webp">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="img/transparent-MIZEN-logo.png">
+<link rel="apple-touch-icon" href="img/transparent-MIZEN-logo.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MIZEN SUITE",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "ERP / MES",
+  "operatingSystem": "Web",
+  "description": "Solution ERP/MES qui équilibre charge d'atelier, coût de revient et délai client pour l'industrie de précision.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF", "description": "Démonstration gratuite sur demande" }
+}
+</script>
+
 <style>
   :root{
     --cream:#F7F3EC;
@@ -39,6 +82,15 @@
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
   @media(max-width:640px){.wrap{padding:0 20px;}}
 
+  /* Skip link (a11y) */
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:200;
+    background:var(--navy);color:var(--cream);padding:10px 18px;border-radius:0 0 10px 0;
+    font-size:14px;font-weight:700;
+  }
+  .skip-link:focus{left:0;}
+  :focus-visible{outline:3px solid var(--tan-dark);outline-offset:2px;border-radius:4px;}
+
   /* ---------- NAV ---------- */
   header{
     position:sticky;top:0;z-index:50;
@@ -51,26 +103,64 @@
     padding:16px 32px; max-width:1180px;margin:0 auto;
   }
   nav .logo img{height:34px;}
-  nav ul{display:flex;gap:34px;list-style:none;}
+  nav ul{display:flex;gap:30px;list-style:none;align-items:center;}
   nav ul li a{
     font-size:14.5px;font-weight:600;color:var(--navy-soft);
     position:relative; padding-bottom:4px;
   }
-  nav ul li a:hover{color:var(--navy);}
+  nav ul li a:hover,nav ul li a.active{color:var(--navy);}
   nav ul li a::after{
     content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
     background:var(--tan-dark);transition:width .25s ease;
   }
-  nav ul li a:hover::after{width:100%;}
+  nav ul li a:hover::after,nav ul li a.active::after{width:100%;}
   .nav-cta{
     background:var(--navy);color:var(--cream);
     padding:10px 20px;border-radius:30px;font-size:14px;font-weight:700;
-    white-space:nowrap;
+    white-space:nowrap;transition:background .2s ease;
   }
   .nav-cta:hover{background:var(--tan-dark);}
-  .nav-links-mobile{display:none;}
-  @media(max-width:860px){
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .nav-login{font-size:14px;font-weight:600;color:var(--navy-soft);}
+  .nav-login:hover{color:var(--navy);}
+
+  /* hamburger */
+  .nav-toggle{
+    display:none;background:none;border:none;cursor:pointer;
+    width:42px;height:42px;border-radius:10px;
+    align-items:center;justify-content:center;flex-direction:column;gap:5px;
+  }
+  .nav-toggle span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.3s;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  @media(max-width:980px){
     nav ul{display:none;}
+    .nav-login{display:none;}
+    .nav-toggle{display:flex;}
+  }
+  /* mobile drawer */
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:60;
+    background:rgba(28,35,48,0.45);backdrop-filter:blur(2px);
+  }
+  .mobile-menu.open{display:block;}
+  .mobile-panel{
+    position:absolute;top:0;right:0;height:100%;width:min(320px,84vw);
+    background:var(--cream);padding:24px;
+    display:flex;flex-direction:column;gap:6px;
+    box-shadow:-20px 0 50px -20px rgba(0,0,0,0.4);
+    transform:translateX(100%);transition:transform .3s ease;
+  }
+  .mobile-menu.open .mobile-panel{transform:translateX(0);}
+  .mobile-panel .mm-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+  .mobile-panel .mm-head img{height:30px;}
+  .mm-close{background:none;border:none;font-size:26px;cursor:pointer;color:var(--navy);line-height:1;}
+  .mobile-panel a{padding:13px 8px;font-size:16px;font-weight:600;border-bottom:1px solid var(--line);}
+  .mobile-panel a.mm-cta{
+    margin-top:16px;background:var(--navy);color:var(--cream);text-align:center;
+    border-radius:30px;border:none;
   }
 
   /* ---------- HERO ---------- */
@@ -107,11 +197,11 @@
   .btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:14px 26px;border-radius:30px;font-weight:700;font-size:15px;
-    transition:transform .2s ease, box-shadow .2s ease;
+    transition:transform .2s ease, box-shadow .2s ease;cursor:pointer;border:none;
   }
   .btn-primary{background:var(--navy);color:var(--cream);}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(28,35,48,0.25);}
-  .btn-ghost{border:1.5px solid var(--navy); color:var(--navy);}
+  .btn-ghost{border:1.5px solid var(--navy); color:var(--navy);background:transparent;}
   .btn-ghost:hover{background:var(--navy);color:var(--cream);transform:translateY(-2px);}
   .hero-stats{display:flex;gap:34px;flex-wrap:wrap;}
   .hero-stats div{border-left:2px solid var(--tan);padding-left:14px;}
@@ -135,15 +225,21 @@
   @keyframes bobR{0%,100%{transform:translateY(-8px);}50%{transform:translateY(8px);}}
   @media (prefers-reduced-motion: reduce){
     .beam,.pan-left,.pan-right{animation:none;}
+    html{scroll-behavior:auto;}
   }
 
   /* ---------- SECTION HEADERS ---------- */
   .section{padding:96px 0;}
   .section-head{max-width:620px;margin-bottom:54px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head.center .eyebrow{justify-content:center;}
   .section-head .eyebrow{margin-bottom:14px;}
   .section-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:600;margin-bottom:14px;}
   .section-head p{font-size:16.5px;color:var(--navy-soft);line-height:1.65;}
   .alt-bg{background:var(--cream-deep);}
+  .navy-bg{background:var(--navy);color:var(--cream);}
+  .navy-bg .section-head h2{color:var(--cream);}
+  .navy-bg .section-head p{color:#C3C9D4;}
 
   /* ---------- LOGOS / clients ---------- */
   .clients-strip{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -170,6 +266,32 @@
     position:absolute;right:-10px;bottom:-10px;font-size:90px;opacity:.06;
     font-family:'Fraunces',serif;color:var(--navy);
   }
+
+  /* ---------- MES real-time (shop-floor) ---------- */
+  .mes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  @media(max-width:920px){.mes-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.mes-grid{grid-template-columns:1fr;}}
+  .mes-card{
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;padding:26px 22px;transition:.25s;
+  }
+  .mes-card:hover{border-color:var(--tan);background:rgba(201,154,102,0.08);transform:translateY(-3px);}
+  .mes-card .mi{font-size:24px;margin-bottom:14px;display:block;}
+  .mes-card h4{font-size:17px;font-weight:700;color:var(--cream);margin-bottom:8px;}
+  .mes-card p{font-size:14px;color:#B9BFCB;line-height:1.6;}
+  /* live OEE bar */
+  .oee-live{
+    display:flex;align-items:center;gap:14px;margin-top:40px;flex-wrap:wrap;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;padding:22px 26px;
+  }
+  .oee-live .dot{width:10px;height:10px;border-radius:50%;background:#5ED39E;box-shadow:0 0 0 0 rgba(94,211,158,0.6);animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,211,158,0.5);}70%{box-shadow:0 0 0 10px rgba(94,211,158,0);}100%{box-shadow:0 0 0 0 rgba(94,211,158,0);}}
+  @media (prefers-reduced-motion: reduce){.oee-live .dot{animation:none;}}
+  .oee-live .lbl{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--tan-light);}
+  .oee-track{flex:1;min-width:180px;height:10px;border-radius:6px;background:rgba(255,255,255,0.12);overflow:hidden;}
+  .oee-fill{height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--tan),#5ED39E);transition:width 1.6s ease;}
+  .oee-live .pct{font-family:'Fraunces',serif;font-size:24px;color:var(--cream);min-width:64px;text-align:right;}
 
   /* ---------- SHOWCASE (split image/text) ---------- */
   .showcase{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
@@ -216,6 +338,16 @@
   .module h4{font-size:16px;font-weight:700;margin-bottom:8px;}
   .module p{font-size:13.5px;color:var(--navy-soft);line-height:1.55;}
 
+  /* ---------- INTEGRATIONS ---------- */
+  .integrations{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+  .integ-chip{
+    display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
+    border-radius:30px;padding:12px 22px;font-size:14.5px;font-weight:600;color:var(--navy);
+    transition:.2s;
+  }
+  .integ-chip:hover{border-color:var(--tan);transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(28,35,48,0.3);}
+  .integ-chip .ic{font-size:18px;}
+
   /* ---------- TESTIMONIAL ---------- */
   .testimonial{
     background:var(--navy);color:var(--cream);border-radius:24px;
@@ -252,28 +384,101 @@
     font-size:13px;font-weight:700;margin-top:14px;
   }
 
-  /* ---------- CTA ---------- */
+  /* ---------- PRICING / EDITIONS ---------- */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;}
+  @media(max-width:880px){.pricing{grid-template-columns:1fr;}}
+  .plan{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 28px;
+    display:flex;flex-direction:column;position:relative;transition:.25s;
+  }
+  .plan:hover{transform:translateY(-4px);box-shadow:0 30px 60px -34px rgba(28,35,48,0.4);}
+  .plan.featured{border:1.5px solid var(--tan-dark);box-shadow:0 30px 60px -34px rgba(156,110,63,0.45);}
+  .plan .badge{
+    position:absolute;top:-13px;left:28px;background:var(--tan-dark);color:#fff;
+    font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 14px;border-radius:30px;
+  }
+  .plan h3{font-size:22px;font-weight:600;margin-bottom:6px;}
+  .plan .plan-desc{font-size:14px;color:var(--navy-soft);margin-bottom:18px;min-height:40px;}
+  .plan .price{font-family:'Fraunces',serif;font-size:34px;color:var(--navy);margin-bottom:4px;}
+  .plan .price small{font-size:14px;font-weight:600;color:var(--navy-soft);font-family:'Manrope',sans-serif;}
+  .plan .price-note{font-size:12.5px;color:var(--navy-soft);margin-bottom:22px;}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px;flex:1;}
+  .plan ul li{display:flex;gap:10px;font-size:14px;color:var(--navy);align-items:flex-start;}
+  .plan ul li::before{content:"✓";color:var(--sage);font-weight:800;}
+  .plan .btn{justify-content:center;width:100%;}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:820px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:22px 4px;font-size:17px;font-weight:600;color:var(--navy);
+    font-family:'Manrope',sans-serif;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;
+  }
+  .faq-q .chev{transition:transform .3s ease;color:var(--tan-dark);font-size:22px;flex-shrink:0;}
+  .faq-item.open .faq-q .chev{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .faq-a p{padding:0 4px 22px;font-size:15px;color:var(--navy-soft);line-height:1.7;}
+
+  /* ---------- CTA / FORM ---------- */
   .cta{
     background:linear-gradient(120deg,var(--tan-dark),var(--tan));
-    border-radius:24px;padding:64px 50px;text-align:center;color:#fff;
+    border-radius:24px;padding:54px 50px;color:#fff;
     position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
   }
+  @media(max-width:860px){.cta{grid-template-columns:1fr;padding:40px 26px;}}
   .cta h2{font-size:clamp(26px,3.6vw,38px);font-weight:600;margin-bottom:16px;}
-  .cta p{font-size:16px;opacity:.92;max-width:480px;margin:0 auto 30px;}
-  .cta .btn-primary{background:var(--navy);}
-  .cta .btn-ghost{border-color:#fff;color:#fff;}
-  .cta .btn-ghost:hover{background:#fff;color:var(--tan-dark);}
+  .cta p{font-size:16px;opacity:.95;max-width:480px;margin:0 0 22px;}
+  .cta .cta-points{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .cta .cta-points li{display:flex;gap:10px;font-size:15px;font-weight:600;align-items:center;}
+  .cta .cta-points li::before{content:"✓";font-weight:800;}
+  .demo-form{
+    background:rgba(255,255,255,0.96);border-radius:18px;padding:28px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.4);
+  }
+  .demo-form .fg{margin-bottom:14px;}
+  .demo-form label{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+  .demo-form input,.demo-form textarea,.demo-form select{
+    width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    font-family:'Manrope',sans-serif;font-size:14.5px;color:var(--navy);background:#fff;
+  }
+  .demo-form input:focus,.demo-form textarea:focus,.demo-form select:focus{
+    outline:none;border-color:var(--tan-dark);box-shadow:0 0 0 3px rgba(201,154,102,0.25);
+  }
+  .demo-form textarea{resize:vertical;min-height:78px;}
+  .demo-form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:480px){.demo-form .row{grid-template-columns:1fr;}}
+  .demo-form button{width:100%;justify-content:center;margin-top:6px;background:var(--navy);color:#fff;}
+  .demo-form button:hover{background:#0f141d;}
+  .form-success{
+    display:none;background:var(--sage-light);border:1px solid var(--sage);color:var(--sage);
+    border-radius:12px;padding:16px;font-size:14.5px;font-weight:600;text-align:center;
+  }
+  .form-success.show{display:block;}
+  .form-note{font-size:12px;color:var(--navy-soft);margin-top:10px;text-align:center;}
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--navy);color:var(--cream);padding:64px 0 30px;}
   .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
   @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
-  .footer-grid img{height:30px;filter:brightness(0) invert(1);margin-bottom:14px;}
+  @media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+  .footer-grid img.flogo{height:30px;filter:brightness(0) invert(1);margin-bottom:14px;}
   .footer-grid p{font-size:14px;color:#B9BFCB;line-height:1.6;max-width:280px;}
   .footer-grid h5{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--tan-light);margin-bottom:16px;}
   .footer-grid ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
   .footer-grid ul li a{font-size:14px;color:#D8DCE4;}
   .footer-grid ul li a:hover{color:#fff;}
+  .social{display:flex;gap:12px;margin-top:18px;}
+  .social a{
+    width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);
+    display:flex;align-items:center;justify-content:center;transition:.2s;
+  }
+  .social a:hover{background:var(--tan-dark);border-color:var(--tan-dark);}
+  .social svg{width:18px;height:18px;fill:#D8DCE4;}
+  .social a:hover svg{fill:#fff;}
   .footer-bottom{
     border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#9AA1B0;
@@ -281,29 +486,71 @@
 
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;}}
+
+  /* back to top */
+  .to-top{
+    position:fixed;right:24px;bottom:24px;z-index:40;
+    width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--navy);color:var(--cream);font-size:20px;
+    box-shadow:0 12px 30px -10px rgba(28,35,48,0.5);
+    opacity:0;visibility:hidden;transform:translateY(10px);transition:.3s;
+  }
+  .to-top.show{opacity:1;visibility:visible;transform:none;}
+  .to-top:hover{background:var(--tan-dark);}
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#main">Aller au contenu principal</a>
+
 <header>
   <nav>
-    <div class="logo"><img src="img/transparent-MIZEN-logo.png" alt="MIZEN SUITE"></div>
+    <div class="logo"><a href="#" aria-label="Accueil MIZEN SUITE"><img src="img/transparent-MIZEN-logo.png" alt="MIZEN SUITE"></a></div>
     <ul>
       <li><a href="#equilibre">L'équilibre</a></li>
+      <li><a href="#mes">Atelier connecté</a></li>
       <li><a href="#modules">Modules</a></li>
       <li><a href="#dashboard">Pilotage</a></li>
-      <li><a href="#clients">Clients</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#tarifs">Tarifs</a></li>
+      <li><a href="#faq">FAQ</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Demander une démo</a>
+    <div class="nav-right">
+      <a href="#login" class="nav-login">Connexion</a>
+      <a href="#contact" class="nav-cta">Demander une démo</a>
+      <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-panel">
+    <div class="mm-head">
+      <img src="img/transparent-MIZEN-logo.png" alt="MIZEN SUITE">
+      <button class="mm-close" aria-label="Fermer le menu">&times;</button>
+    </div>
+    <a href="#equilibre">L'équilibre</a>
+    <a href="#mes">Atelier connecté</a>
+    <a href="#modules">Modules</a>
+    <a href="#dashboard">Pilotage</a>
+    <a href="#integrations">Intégrations</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#faq">FAQ</a>
+    <a href="#login">Connexion</a>
+    <a href="#contact" class="mm-cta">Demander une démo</a>
+  </div>
+</div>
+
+<main id="main">
 
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
     <div>
-      <span class="eyebrow">ERP de production · Suisse &amp; international</span>
+      <span class="eyebrow">ERP / MES de production · Suisse &amp; international</span>
       <h1>L'ERP qui <em>équilibre</em><br>votre production.</h1>
       <p class="lead">MIZEN SUITE met en balance charge d'atelier, coûts de revient et délais clients sur un seul plateau — pour que chaque décision de production reste à l'équilibre.</p>
       <div class="btn-row">
@@ -311,14 +558,14 @@
         <a href="#equilibre" class="btn btn-ghost">Découvrir l'équilibre Mizen</a>
       </div>
       <div class="hero-stats">
-        <div><strong>360°</strong><span>Visibilité atelier &amp; ERP</span></div>
-        <div><strong>-28%</strong><span>de délais de pièce cyclée</span></div>
+        <div><strong data-count="360" data-suffix="°">360°</strong><span>Visibilité atelier &amp; ERP</span></div>
+        <div><strong data-count="28" data-prefix="-" data-suffix="%">-28%</strong><span>de délais de pièce cyclée</span></div>
         <div><strong>1 plateau</strong><span>commercial · production · finance</span></div>
       </div>
     </div>
 
     <div class="scale-wrap">
-      <svg class="scale-svg" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+      <svg class="scale-svg" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Balance illustrant l'équilibre entre atelier et client">
         <!-- base -->
         <rect x="280" y="320" width="40" height="40" rx="4" fill="#1C2330"/>
         <polygon points="240,360 360,360 380,378 220,378" fill="#1C2330" opacity="0.9"/>
@@ -393,6 +640,34 @@
   </div>
 </section>
 
+<!-- MES / ATELIER CONNECTÉ -->
+<section class="section navy-bg" id="mes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:var(--tan-light);">Le volet MES · temps réel</span>
+      <h2>L'atelier connecté, pas seulement l'ERP.</h2>
+      <p>Mizen Suite ne s'arrête pas au bureau : il descend jusqu'au pied de la machine. Acquisition des données de production, suivi du rendement et traçabilité remontent en direct dans la même balance que vos coûts et vos délais.</p>
+    </div>
+    <div class="mes-grid">
+      <div class="mes-card reveal"><span class="mi">📡</span><h4>Suivi machine en direct</h4><p>États marche / arrêt / réglage remontés en continu depuis chaque poste, sans saisie manuelle.</p></div>
+      <div class="mes-card reveal"><span class="mi">📈</span><h4>Rendement &amp; OEE</h4><p>Taux de rendement synthétique (disponibilité × performance × qualité) calculé poste par poste, en temps réel.</p></div>
+      <div class="mes-card reveal"><span class="mi">🧭</span><h4>Ordonnancement</h4><p>Planning de charge visuel : glissez un OF, la balance recalcule immédiatement délais et occupation.</p></div>
+      <div class="mes-card reveal"><span class="mi">🔍</span><h4>Traçabilité totale</h4><p>Numéro de lot, matière, opérateur et contrôle qualité associés à chaque pièce, du brut à l'expédition.</p></div>
+      <div class="mes-card reveal"><span class="mi">📱</span><h4>Terminal atelier</h4><p>Pointage des opérations, déclaration de quantités et rebuts depuis une tablette tactile au pied de la machine.</p></div>
+      <div class="mes-card reveal"><span class="mi">✅</span><h4>Contrôle qualité</h4><p>Plans de contrôle, relevés de cotes et non-conformités gérés directement sur la fiche pièce.</p></div>
+      <div class="mes-card reveal"><span class="mi">🛎️</span><h4>Alertes intelligentes</h4><p>Notification immédiate en cas d'arrêt prolongé, de dérive qualité ou de retard sur un engagement client.</p></div>
+      <div class="mes-card reveal"><span class="mi">🔧</span><h4>Maintenance (GMAO)</h4><p>Compteurs d'usage machine, maintenance préventive et historique d'interventions au même endroit.</p></div>
+    </div>
+
+    <div class="oee-live reveal" aria-label="Exemple de rendement en direct">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="lbl">OEE atelier · en direct</span>
+      <div class="oee-track"><div class="oee-fill" data-fill="87"></div></div>
+      <span class="pct" data-count="87" data-suffix="%">0%</span>
+    </div>
+  </div>
+</section>
+
 <!-- SHOWCASE 1: Fiche pièce cyclée -->
 <section class="section alt-bg">
   <div class="wrap">
@@ -455,16 +730,41 @@
       <div class="module reveal"><div class="icon">📦</div><h4>Stocks &amp; logistique</h4><p>Commandes dépôt, quantités économiques et traçabilité pièce par pièce.</p></div>
       <div class="module reveal"><div class="icon">💰</div><h4>Coûts &amp; facturation</h4><p>Prix de revient, minimums de facturation, devis et factures liés à la fiche pièce.</p></div>
       <div class="module reveal"><div class="icon">📊</div><h4>Pilotage &amp; KPI</h4><p>Tableaux de bord direction, indicateurs comparatifs et exports automatisés.</p></div>
-      <div class="module reveal"><div class="icon">🤝</div><h4>Relation client</h4><p>Codes client, historique de commande et engagements de délai centralisés.</p></div>
+      <div class="module reveal"><div class="icon">🤝</div><h4>Relation client (CRM)</h4><p>Codes client, historique de commande et engagements de délai centralisés.</p></div>
       <div class="module reveal"><div class="icon">🛠</div><h4>Bureau d'études</h4><p>Indices de plan, indices de gamme et révisions techniques synchronisés.</p></div>
+      <div class="module reveal"><div class="icon">📡</div><h4>MES &amp; atelier connecté</h4><p>Suivi machine, OEE, terminal de pointage et acquisition de données en direct.</p></div>
+      <div class="module reveal"><div class="icon">🛒</div><h4>Achats &amp; appros</h4><p>Demandes d'achat, fournisseurs et réapprovisionnement piloté par les besoins.</p></div>
+      <div class="module reveal"><div class="icon">✅</div><h4>Qualité &amp; conformité</h4><p>Plans de contrôle, non-conformités et traçabilité pour l'audit et la certification.</p></div>
+      <div class="module reveal"><div class="icon">🔧</div><h4>Maintenance (GMAO)</h4><p>Préventif, curatif, compteurs machine et historique d'interventions.</p></div>
       <div class="module reveal"><div class="icon">🔐</div><h4>Accès &amp; sécurité</h4><p>Portail de connexion dédié par site, par rôle et par atelier.</p></div>
       <div class="module reveal"><div class="icon">🚀</div><h4>Accompagnement projet</h4><p>Déploiement encadré, formation des équipes et support à la mise en service.</p></div>
     </div>
   </div>
 </section>
 
+<!-- INTEGRATIONS -->
+<section class="section" id="integrations">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Écosystème ouvert</span>
+      <h2>Connecté à vos outils, pas à votre place.</h2>
+      <p>Mizen Suite s'intègre à votre environnement existant — comptabilité, CAO/FAO, machines à commande numérique et bureautique — via API REST et connecteurs standard.</p>
+    </div>
+    <div class="integrations reveal">
+      <span class="integ-chip"><span class="ic">🧮</span> Comptabilité &amp; paie</span>
+      <span class="integ-chip"><span class="ic">📐</span> CAO / FAO</span>
+      <span class="integ-chip"><span class="ic">🏭</span> Machines CN (OPC-UA / MTConnect)</span>
+      <span class="integ-chip"><span class="ic">📊</span> Excel &amp; Power BI</span>
+      <span class="integ-chip"><span class="ic">📧</span> Microsoft 365 / Outlook</span>
+      <span class="integ-chip"><span class="ic">🔗</span> API REST &amp; Webhooks</span>
+      <span class="integ-chip"><span class="ic">🏷️</span> Lecteurs code-barres / QR</span>
+      <span class="integ-chip"><span class="ic">🚚</span> EDI fournisseurs &amp; clients</span>
+    </div>
+  </div>
+</section>
+
 <!-- LOGIN PREVIEW -->
-<section class="section">
+<section class="section alt-bg" id="login">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Accès sécurisé</span>
@@ -478,6 +778,64 @@
         <div class="field"></div>
         <div class="field"></div>
         <div class="field-btn">Se connecter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING / EDITIONS -->
+<section class="section" id="tarifs">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Éditions</span>
+      <h2>Une édition pour chaque taille d'atelier.</h2>
+      <p>Du petit atelier de décolletage au groupe multi-sites, Mizen Suite grandit avec vous. Tarification sur devis, adaptée à votre nombre de postes et d'utilisateurs.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan reveal">
+        <h3>Atelier</h3>
+        <p class="plan-desc">Pour les ateliers qui structurent leur production.</p>
+        <div class="price">Sur devis</div>
+        <div class="price-note">à partir de 5 utilisateurs</div>
+        <ul>
+          <li>Fiche pièce cyclée &amp; gammes</li>
+          <li>Ordres de fabrication</li>
+          <li>Prix de revient &amp; devis</li>
+          <li>Tableau de bord essentiel</li>
+          <li>Support par e-mail</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Demander un devis</a>
+      </div>
+      <div class="plan featured reveal">
+        <span class="badge">Le plus choisi</span>
+        <h3>Suite</h3>
+        <p class="plan-desc">L'équilibre complet ERP + MES temps réel.</p>
+        <div class="price">Sur devis</div>
+        <div class="price-note">utilisateurs &amp; postes illimités par site</div>
+        <ul>
+          <li>Tout l'édition Atelier</li>
+          <li>MES : suivi machine &amp; OEE</li>
+          <li>Terminal atelier &amp; traçabilité</li>
+          <li>Qualité, achats &amp; GMAO</li>
+          <li>Intégrations &amp; API</li>
+          <li>Support prioritaire</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Réserver une démo</a>
+      </div>
+      <div class="plan reveal">
+        <h3>Entreprise</h3>
+        <p class="plan-desc">Pour les groupes multi-sites et exigences avancées.</p>
+        <div class="price">Sur mesure</div>
+        <div class="price-note">multi-sites · SSO · hébergement dédié</div>
+        <ul>
+          <li>Tout l'édition Suite</li>
+          <li>Multi-sites consolidés</li>
+          <li>SSO &amp; gestion des rôles avancée</li>
+          <li>Hébergement dédié ou on-premise</li>
+          <li>Accompagnement projet dédié</li>
+          <li>SLA &amp; support 24/7</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Parler à un expert</a>
       </div>
     </div>
   </div>
@@ -506,14 +864,50 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Questions fréquentes</span>
+      <h2>Tout ce qu'il faut savoir avant la démo.</h2>
+    </div>
+    <div class="faq reveal">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Quelle différence entre l'ERP et le MES de Mizen Suite ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>L'ERP gère le flux de gestion — devis, fiches pièces, coûts, commandes, facturation. Le MES descend au pied de la machine : suivi en temps réel des postes, calcul de l'OEE, pointage des opérations et traçabilité. Mizen Suite réunit les deux dans une seule balance, sans double saisie ni passerelle à maintenir.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Combien de temps dure un déploiement ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Un atelier type est opérationnel en 6 à 12 semaines selon le périmètre. Le déploiement est encadré : reprise de vos données, paramétrage des gammes, formation des équipes et accompagnement à la mise en service.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Mizen Suite est-il adapté au décolletage et à la mécanique de précision ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Oui — c'est son terrain d'origine. La fiche pièce cyclée, les temps de cyclage, les indices de plan/gamme et les quantités économiques sont pensés pour la production en série de pièces de précision.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Mes données sont-elles hébergées en Suisse ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Vous choisissez : hébergement cloud en Suisse, hébergement dédié, ou installation on-premise sur vos serveurs avec l'édition Entreprise. Sauvegardes chiffrées et gestion fine des accès dans tous les cas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Peut-on connecter nos machines et notre comptabilité existantes ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Oui. Mizen Suite communique avec les machines CN via OPC-UA / MTConnect et s'intègre à votre comptabilité, à Microsoft 365 et à Power BI via API REST, webhooks et connecteurs standard.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Proposez-vous une démonstration ?<span class="chev" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>Oui, gratuitement. En 30 minutes, nous regardons ensemble où penche aujourd'hui votre balance charge / coût / délai, puis nous vous montrons Mizen Suite sur votre cas réel. Utilisez le formulaire ci-dessous.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- COLLAGE / IN ACTION -->
-<section class="section">
+<section class="section alt-bg">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Sur le terrain</span>
       <h2>Mizen Suite, vu de l'atelier comme du comité de direction.</h2>
     </div>
-    <div style="display:grid;grid-template-columns:1.1fr 0.7fr 0.9fr;gap:20px;align-items:center;" class="reveal">
+    <div style="display:grid;grid-template-columns:1.1fr 0.7fr 0.9fr;gap:20px;align-items:center;" class="reveal collage">
       <div class="img-frame"><img src="img/1782666633908_image.png" alt="Indicateurs Mizen Suite en réunion"></div>
       <div class="img-frame"><img src="img/1782666681277_image.png" alt="ERP Mizen Suite sur ordinateur portable"></div>
       <div class="img-frame"><img src="img/1782666649478_image.png" alt="Réunion projet Mizen Suite"></div>
@@ -521,65 +915,213 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA + FORM -->
 <section class="section" id="contact">
   <div class="wrap">
     <div class="cta reveal">
-      <h2>Mettez votre production à l'équilibre.</h2>
-      <p>Échangez 30 minutes avec notre équipe : nous regardons ensemble où penche aujourd'hui votre balance charge / coût / délai.</p>
-      <div class="btn-row" style="justify-content:center;">
-        <a href="#" class="btn btn-primary">Réserver une démo →</a>
-        <a href="#" class="btn btn-ghost">Parler à un expert</a>
+      <div>
+        <h2>Mettez votre production à l'équilibre.</h2>
+        <p>Échangez 30 minutes avec notre équipe : nous regardons ensemble où penche aujourd'hui votre balance charge / coût / délai.</p>
+        <ul class="cta-points">
+          <li>Démonstration sur votre cas réel</li>
+          <li>Sans engagement, 100&nbsp;% gratuite</li>
+          <li>Réponse sous 1 jour ouvré</li>
+        </ul>
       </div>
+      <form class="demo-form" id="demoForm" novalidate>
+        <div class="row">
+          <div class="fg">
+            <label for="firstname">Prénom</label>
+            <input id="firstname" name="firstname" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="fg">
+            <label for="lastname">Nom</label>
+            <input id="lastname" name="lastname" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label for="email">E-mail professionnel</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="row">
+          <div class="fg">
+            <label for="company">Entreprise</label>
+            <input id="company" name="company" type="text" autocomplete="organization" required>
+          </div>
+          <div class="fg">
+            <label for="phone">Téléphone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+        <div class="fg">
+          <label for="size">Taille de l'atelier</label>
+          <select id="size" name="size">
+            <option value="">— Sélectionner —</option>
+            <option>1 à 10 personnes</option>
+            <option>11 à 50 personnes</option>
+            <option>51 à 200 personnes</option>
+            <option>Plus de 200 personnes</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="message">Votre besoin (optionnel)</label>
+          <textarea id="message" name="message" placeholder="Où penche aujourd'hui votre balance charge / coût / délai ?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Réserver ma démo →</button>
+        <p class="form-note">En envoyant ce formulaire, vous acceptez d'être recontacté par MIZEN SUITE. Aucune donnée n'est partagée avec des tiers.</p>
+        <div class="form-success" id="formSuccess" role="status">✓ Merci ! Votre demande est bien enregistrée. Notre équipe vous recontacte sous 1 jour ouvré.</div>
+      </form>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="img/transparent-MIZEN-logo.png" alt="Mizen Suite" style="filter:none;">
-        <p>L'ERP qui équilibre votre production : charge d'atelier, coût de revient et délai client, sur un seul plateau.</p>
+        <img class="flogo" src="img/transparent-MIZEN-logo.png" alt="Mizen Suite" style="filter:none;">
+        <p>L'ERP/MES qui équilibre votre production : charge d'atelier, coût de revient et délai client, sur un seul plateau.</p>
+        <div class="social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.8-2.05 4.06 0 4.8 2.67 4.8 6.14V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.34 5.1 12 5.1 12 5.1s-7.34 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77c1.49.43 8.83.43 8.83.43s7.34 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12zM9.75 15.5v-7l6 3.5z"/></svg></a>
+          <a href="mailto:contact@mizensuite.com" aria-label="E-mail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20v16H2zm2 2v.4l8 5 8-5V6zm16 12V8.6l-8 5-8-5V18z"/></svg></a>
+        </div>
       </div>
       <div>
         <h5>Produit</h5>
         <ul>
           <li><a href="#equilibre">L'équilibre Mizen</a></li>
+          <li><a href="#mes">Atelier connecté (MES)</a></li>
           <li><a href="#modules">Modules</a></li>
           <li><a href="#dashboard">Pilotage &amp; KPI</a></li>
+          <li><a href="#integrations">Intégrations</a></li>
+          <li><a href="#tarifs">Tarifs &amp; éditions</a></li>
         </ul>
       </div>
       <div>
         <h5>Entreprise</h5>
         <ul>
           <li><a href="#clients">Clients</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#">À propos</a></li>
           <li><a href="#">Carrières</a></li>
+          <li><a href="#">Blog</a></li>
         </ul>
       </div>
       <div>
         <h5>Contact</h5>
         <ul>
           <li><a href="#contact">Réserver une démo</a></li>
-          <li><a href="#">support@mizensuite.com</a></li>
-          <li><a href="#">+41 00 000 00 00</a></li>
+          <li><a href="mailto:contact@mizensuite.com">contact@mizensuite.com</a></li>
+          <li><a href="tel:+41000000000">+41 00 000 00 00</a></li>
+          <li><a href="#login">Espace client</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Mizen Suite. Tous droits réservés.</span>
-      <span>Confidentialité · Conditions d'utilisation</span>
+      <span><a href="#">Confidentialité</a> · <a href="#">Conditions d'utilisation</a> · <a href="#">Mentions légales</a></span>
     </div>
   </div>
 </footer>
 
+<button class="to-top" id="toTop" aria-label="Revenir en haut">↑</button>
+
 <script>
+  /* ----- Scroll reveal ----- */
   const els = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   },{threshold:0.15});
   els.forEach(el=>io.observe(el));
+
+  /* ----- Mobile menu ----- */
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('mobileMenu');
+  const closeBtn = document.querySelector('.mm-close');
+  function openMenu(){ menu.classList.add('open'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeMenu(){ menu.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  toggle.addEventListener('click', ()=> menu.classList.contains('open') ? closeMenu() : openMenu());
+  closeBtn.addEventListener('click', closeMenu);
+  menu.addEventListener('click', e=>{ if(e.target===menu) closeMenu(); });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
+
+  /* ----- Active nav on scroll ----- */
+  const navLinks = document.querySelectorAll('header nav ul li a');
+  const sections = [...navLinks].map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+e.target.id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+
+  /* ----- Count-up stats ----- */
+  const counters = document.querySelectorAll('[data-count]');
+  const cObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = +el.dataset.count;
+      const prefix = el.dataset.prefix||'';
+      const suffix = el.dataset.suffix||'';
+      let cur = 0;
+      const step = Math.max(1, Math.round(target/40));
+      const tick = ()=>{
+        cur = Math.min(target, cur+step);
+        el.textContent = prefix+cur+suffix;
+        if(cur<target) requestAnimationFrame(tick);
+      };
+      tick();
+      cObs.unobserve(el);
+    });
+  },{threshold:0.6});
+  counters.forEach(c=>cObs.observe(c));
+
+  /* ----- OEE bar fill ----- */
+  const oee = document.querySelector('.oee-fill');
+  if(oee){
+    const oObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ oee.style.width = oee.dataset.fill+'%'; oObs.unobserve(oee); } });
+    },{threshold:0.5});
+    oObs.observe(oee);
+  }
+
+  /* ----- FAQ accordion ----- */
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); o.querySelector('.faq-a').style.maxHeight=null;
+      });
+      if(!isOpen){
+        item.classList.add('open'); q.setAttribute('aria-expanded','true'); a.style.maxHeight=a.scrollHeight+'px';
+      }
+    });
+  });
+
+  /* ----- Demo form ----- */
+  const form = document.getElementById('demoForm');
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    /* No backend wired yet — capture intent and confirm to the user. */
+    form.querySelector('button[type=submit]').style.display='none';
+    document.querySelectorAll('#demoForm .fg, #demoForm .row, #demoForm .form-note').forEach(n=>n.style.display='none');
+    document.getElementById('formSuccess').classList.add('show');
+  });
+
+  /* ----- Back to top ----- */
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', ()=>{ toTop.classList.toggle('show', window.scrollY>600); }, {passive:true});
+  toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 </script>
 
 </body>

@@ -32,18 +32,33 @@ Aucune installation requise. Ouvrez simplement `index.html` dans un navigateur :
 
 ## Sections incluses
 
-1. **Navigation** sticky avec logo et CTA "Demander une démo"
-2. **Hero** avec balance animée en SVG (signature visuelle)
+1. **Navigation** sticky avec logo, lien Connexion, CTA "Demander une démo" et **menu mobile (hamburger)**
+2. **Hero** avec balance animée en SVG (signature visuelle) et **compteurs animés**
 3. **Strip clients** avec SOFEM
 4. **L'équilibre Mizen** — 3 piliers (Capacité / Coût / Délai)
-5. **Fiche pièce cyclée** — showcase atelier
-6. **Tableau de bord / Pilotage** — showcase KPI
-7. **Modules** — 8 modules de la suite
-8. **Portail de connexion** — preview du login
-9. **Témoignage SOFEM**
-10. **Galerie terrain**
-11. **CTA démo**
-12. **Footer**
+5. **Atelier connecté (MES)** — suivi machine, OEE en direct, ordonnancement, traçabilité, terminal, qualité, alertes, GMAO
+6. **Fiche pièce cyclée** — showcase atelier
+7. **Tableau de bord / Pilotage** — showcase KPI
+8. **Modules** — 12 modules de la suite (ERP + MES)
+9. **Intégrations** — comptabilité, CAO/FAO, machines CN, Power BI, API REST…
+10. **Portail de connexion** — preview du login
+11. **Tarifs / Éditions** — Atelier / Suite / Entreprise
+12. **Témoignage SOFEM**
+13. **FAQ** — accordéon (6 questions)
+14. **Galerie terrain**
+15. **CTA + formulaire de démo** (validation côté client)
+16. **Footer** étendu (liens, réseaux sociaux)
+17. **Bouton retour en haut**
+
+## Améliorations techniques
+
+- **SEO** : meta description, Open Graph, Twitter Cards, canonical, favicon, données structurées JSON-LD (`SoftwareApplication`)
+- **Accessibilité** : skip link, `aria-*` sur menu/FAQ, focus visible, `role="img"` sur le SVG
+- **Navigation active** au scroll (IntersectionObserver)
+- **Animations** respectant `prefers-reduced-motion`
+
+> Le formulaire de démo valide les champs côté client et affiche une confirmation.
+> Il n'est pas encore relié à un backend — brancher l'envoi (e-mail / CRM / API) dans `index.html` (`#demoForm`).
 
 ## Technologies
 
