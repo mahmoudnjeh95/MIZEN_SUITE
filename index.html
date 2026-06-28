@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIZEN SUITE — L'ERP qui équilibre votre production</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F3EC;
+    --cream-deep:#EFE8DB;
+    --navy:#1C2330;
+    --navy-soft:#3B4456;
+    --tan:#C99A66;
+    --tan-light:#E3C49B;
+    --tan-dark:#9C6E3F;
+    --sage:#3E6F61;
+    --sage-light:#E4ECE7;
+    --line: rgba(28,35,48,0.12);
+    --radius: 14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--cream);
+    color:var(--navy);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,243,236,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px; max-width:1180px;margin:0 auto;
+  }
+  nav .logo img{height:34px;}
+  nav ul{display:flex;gap:34px;list-style:none;}
+  nav ul li a{
+    font-size:14.5px;font-weight:600;color:var(--navy-soft);
+    position:relative; padding-bottom:4px;
+  }
+  nav ul li a:hover{color:var(--navy);}
+  nav ul li a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+    background:var(--tan-dark);transition:width .25s ease;
+  }
+  nav ul li a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--navy);color:var(--cream);
+    padding:10px 20px;border-radius:30px;font-size:14px;font-weight:700;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--tan-dark);}
+  .nav-links-mobile{display:none;}
+  @media(max-width:860px){
+    nav ul{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 0 60px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:50px;align-items:center;
+  }
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--tan-dark);margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";width:7px;height:7px;border-radius:50%;background:var(--tan-dark);
+    box-shadow:0 0 0 4px rgba(201,154,102,0.25);
+  }
+  .hero h1{
+    font-size:clamp(34px,5vw,56px);font-weight:600;color:var(--navy);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--tan-dark);
+    background:linear-gradient(180deg, transparent 62%, var(--tan-light) 62%);
+  }
+  .hero p.lead{
+    font-size:18px;line-height:1.6;color:var(--navy-soft);max-width:480px;margin-bottom:32px;
+  }
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;border-radius:30px;font-weight:700;font-size:15px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--navy);color:var(--cream);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(28,35,48,0.25);}
+  .btn-ghost{border:1.5px solid var(--navy); color:var(--navy);}
+  .btn-ghost:hover{background:var(--navy);color:var(--cream);transform:translateY(-2px);}
+  .hero-stats{display:flex;gap:34px;flex-wrap:wrap;}
+  .hero-stats div{border-left:2px solid var(--tan);padding-left:14px;}
+  .hero-stats strong{display:block;font-family:'Fraunces',serif;font-size:26px;color:var(--navy);}
+  .hero-stats span{font-size:13px;color:var(--navy-soft);}
+
+  /* Signature: balance scale visual */
+  .scale-wrap{position:relative;display:flex;justify-content:center;}
+  .scale-svg{width:100%;max-width:480px;}
+  .beam{
+    transform-origin:300px 150px;
+    animation: tilt 6s ease-in-out infinite;
+  }
+  @keyframes tilt{
+    0%,100%{transform:rotate(-3.2deg);}
+    50%{transform:rotate(3.2deg);}
+  }
+  .pan-left{ animation: bobL 6s ease-in-out infinite; }
+  .pan-right{ animation: bobR 6s ease-in-out infinite; }
+  @keyframes bobL{0%,100%{transform:translateY(8px);}50%{transform:translateY(-8px);}}
+  @keyframes bobR{0%,100%{transform:translateY(-8px);}50%{transform:translateY(8px);}}
+  @media (prefers-reduced-motion: reduce){
+    .beam,.pan-left,.pan-right{animation:none;}
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:96px 0;}
+  .section-head{max-width:620px;margin-bottom:54px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);font-weight:600;margin-bottom:14px;}
+  .section-head p{font-size:16.5px;color:var(--navy-soft);line-height:1.65;}
+  .alt-bg{background:var(--cream-deep);}
+
+  /* ---------- LOGOS / clients ---------- */
+  .clients-strip{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .clients-strip .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:28px;}
+  .clients-strip .label{font-size:13px;font-weight:700;color:var(--navy-soft);text-transform:uppercase;letter-spacing:.06em;}
+  .client-logos{display:flex;align-items:center;gap:44px;flex-wrap:wrap;}
+  .client-logos img{height:38px;filter:grayscale(1) contrast(1.1);opacity:.75;transition:.25s;}
+  .client-logos img:hover{filter:none;opacity:1;}
+
+  /* ---------- BALANCE FEATURES (the equilibrium pillars) ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media(max-width:880px){.pillars{grid-template-columns:1fr;}}
+  .pillar{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;position:relative;overflow:hidden;
+  }
+  .pillar .num{
+    font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--tan-dark);
+    letter-spacing:.05em;
+  }
+  .pillar h3{font-size:21px;font-weight:600;margin:14px 0 10px;}
+  .pillar p{font-size:14.5px;color:var(--navy-soft);line-height:1.6;}
+  .pillar .glyph{
+    position:absolute;right:-10px;bottom:-10px;font-size:90px;opacity:.06;
+    font-family:'Fraunces',serif;color:var(--navy);
+  }
+
+  /* ---------- SHOWCASE (split image/text) ---------- */
+  .showcase{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  @media(max-width:880px){.showcase{grid-template-columns:1fr;}}
+  .showcase.reverse .img-col{order:2;}
+  .showcase.reverse .text-col{order:1;}
+  @media(max-width:880px){
+    .showcase.reverse .img-col,.showcase.reverse .text-col{order:initial;}
+  }
+  .img-col{position:relative;}
+  .img-frame{
+    border-radius:18px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 30px 60px -30px rgba(28,35,48,0.35);
+  }
+  .img-frame img{width:100%;height:100%;object-fit:cover;}
+  .tag-pill{
+    position:absolute;bottom:-16px;left:24px;background:var(--navy);color:var(--cream);
+    padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;
+    box-shadow:0 12px 24px -8px rgba(28,35,48,0.4);
+  }
+  .text-col .eyebrow{margin-bottom:14px;}
+  .text-col h3{font-size:28px;font-weight:600;margin-bottom:16px;}
+  .text-col p{color:var(--navy-soft);font-size:16px;line-height:1.7;margin-bottom:18px;}
+  .check-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .check-list li{display:flex;gap:10px;font-size:15px;color:var(--navy);align-items:flex-start;}
+  .check-list li::before{
+    content:"";min-width:8px;height:8px;border-radius:50%;background:var(--sage);margin-top:7px;
+  }
+
+  /* ---------- MODULES grid ---------- */
+  .modules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:920px){.modules{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.modules{grid-template-columns:1fr;}}
+  .module{
+    border:1px solid var(--line);border-radius:12px;padding:24px 20px;background:var(--cream);
+    transition:.25s;
+  }
+  .module:hover{border-color:var(--tan);background:#fff;transform:translateY(-3px);}
+  .module .icon{
+    width:42px;height:42px;border-radius:10px;background:var(--sage-light);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    color:var(--sage);font-size:20px;
+  }
+  .module h4{font-size:16px;font-weight:700;margin-bottom:8px;}
+  .module p{font-size:13.5px;color:var(--navy-soft);line-height:1.55;}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial{
+    background:var(--navy);color:var(--cream);border-radius:24px;
+    padding:64px 60px;display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:center;
+  }
+  @media(max-width:860px){.testimonial{grid-template-columns:1fr;padding:44px 28px;}}
+  .testimonial .img-frame{border:none;}
+  .testimonial blockquote{
+    font-family:'Fraunces',serif;font-size:clamp(20px,2.6vw,27px);font-weight:500;line-height:1.45;margin-bottom:24px;
+  }
+  .testimonial .who{display:flex;align-items:center;gap:14px;}
+  .testimonial .who img{height:30px;filter:brightness(0) invert(1) ;opacity:.9;}
+  .testimonial .who .name{font-size:14px;color:var(--tan-light);font-weight:700;}
+
+  /* ---------- LOGIN PREVIEW ---------- */
+  .login-preview{
+    position:relative;border-radius:22px;overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 40px 80px -40px rgba(28,35,48,0.4);
+  }
+  .login-preview img.bg{width:100%;display:block;}
+  .login-card{
+    position:absolute; top:50%; left:8%; transform:translateY(-50%);
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(6px);
+    border-radius:14px; padding:26px 26px 22px; width:230px;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.4);
+  }
+  .login-card img{height:26px;margin-bottom:16px;}
+  .login-card .field{
+    background:#fff;border:1px solid var(--line);border-radius:8px;height:34px;margin-bottom:10px;
+  }
+  .login-card .field-btn{
+    background:var(--navy);color:#fff;border-radius:8px;height:36px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;margin-top:14px;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    background:linear-gradient(120deg,var(--tan-dark),var(--tan));
+    border-radius:24px;padding:64px 50px;text-align:center;color:#fff;
+    position:relative;overflow:hidden;
+  }
+  .cta h2{font-size:clamp(26px,3.6vw,38px);font-weight:600;margin-bottom:16px;}
+  .cta p{font-size:16px;opacity:.92;max-width:480px;margin:0 auto 30px;}
+  .cta .btn-primary{background:var(--navy);}
+  .cta .btn-ghost{border-color:#fff;color:#fff;}
+  .cta .btn-ghost:hover{background:#fff;color:var(--tan-dark);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--navy);color:var(--cream);padding:64px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;}}
+  .footer-grid img{height:30px;filter:brightness(0) invert(1);margin-bottom:14px;}
+  .footer-grid p{font-size:14px;color:#B9BFCB;line-height:1.6;max-width:280px;}
+  .footer-grid h5{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--tan-light);margin-bottom:16px;}
+  .footer-grid ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .footer-grid ul li a{font-size:14px;color:#D8DCE4;}
+  .footer-grid ul li a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#9AA1B0;
+  }
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><img src="img/transparent-MIZEN-logo.png" alt="MIZEN SUITE"></div>
+    <ul>
+      <li><a href="#equilibre">L'équilibre</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#dashboard">Pilotage</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Demander une démo</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">ERP de production · Suisse &amp; international</span>
+      <h1>L'ERP qui <em>équilibre</em><br>votre production.</h1>
+      <p class="lead">MIZEN SUITE met en balance charge d'atelier, coûts de revient et délais clients sur un seul plateau — pour que chaque décision de production reste à l'équilibre.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Réserver une démo →</a>
+        <a href="#equilibre" class="btn btn-ghost">Découvrir l'équilibre Mizen</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>360°</strong><span>Visibilité atelier &amp; ERP</span></div>
+        <div><strong>-28%</strong><span>de délais de pièce cyclée</span></div>
+        <div><strong>1 plateau</strong><span>commercial · production · finance</span></div>
+      </div>
+    </div>
+
+    <div class="scale-wrap">
+      <svg class="scale-svg" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- base -->
+        <rect x="280" y="320" width="40" height="40" rx="4" fill="#1C2330"/>
+        <polygon points="240,360 360,360 380,378 220,378" fill="#1C2330" opacity="0.9"/>
+        <rect x="294" y="150" width="12" height="172" fill="#1C2330"/>
+        <circle cx="300" cy="150" r="10" fill="#C99A66"/>
+
+        <g class="beam">
+          <rect x="90" y="144" width="420" height="10" rx="5" fill="#9C6E3F"/>
+          <!-- left pan -->
+          <g class="pan-left">
+            <line x1="110" y1="150" x2="80" y2="225" stroke="#9C6E3F" stroke-width="3"/>
+            <line x1="110" y1="150" x2="140" y2="225" stroke="#9C6E3F" stroke-width="3"/>
+            <ellipse cx="110" cy="230" rx="55" ry="14" fill="#E3C49B"/>
+            <rect x="86" y="196" width="48" height="34" rx="6" fill="#3E6F61"/>
+            <text x="110" y="218" font-size="16" fill="#F7F3EC" text-anchor="middle" font-family="Manrope" font-weight="700">ATELIER</text>
+          </g>
+          <!-- right pan -->
+          <g class="pan-right">
+            <line x1="490" y1="150" x2="460" y2="225" stroke="#9C6E3F" stroke-width="3"/>
+            <line x1="490" y1="150" x2="520" y2="225" stroke="#9C6E3F" stroke-width="3"/>
+            <ellipse cx="490" cy="230" rx="55" ry="14" fill="#E3C49B"/>
+            <rect x="463" y="196" width="54" height="34" rx="6" fill="#1C2330"/>
+            <text x="490" y="218" font-size="16" fill="#F7F3EC" text-anchor="middle" font-family="Manrope" font-weight="700">CLIENT</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS STRIP -->
+<section class="clients-strip" id="clients">
+  <div class="wrap">
+    <span class="label">Déjà à l'équilibre avec Mizen Suite</span>
+    <div class="client-logos">
+      <img src="img/sofem-logo.png" alt="SOFEM">
+      <span style="font-family:'Fraunces',serif;font-weight:600;color:var(--navy-soft);opacity:.6;font-size:15px;">Décolletage · Mécanique de précision</span>
+      <span style="font-family:'Fraunces',serif;font-weight:600;color:var(--navy-soft);opacity:.6;font-size:15px;">Production en série</span>
+      <span style="font-family:'Fraunces',serif;font-weight:600;color:var(--navy-soft);opacity:.6;font-size:15px;">Sous-traitance industrielle</span>
+    </div>
+  </div>
+</section>
+
+<!-- L'EQUILIBRE -->
+<section class="section" id="equilibre">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Le principe Mizen</span>
+      <h2>Trois plateaux, un seul point d'équilibre.</h2>
+      <p>Sur un terrain de production, tout penche : la charge d'atelier d'un côté, le coût de revient de l'autre, les délais clients au milieu. Mizen Suite n'élimine pas la tension — il la pilote, en temps réel, pièce par pièce.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="num">01 — Capacité</span>
+        <h3>Charge d'atelier</h3>
+        <p>Suivi des cycles, des temps de cyclage et de l'occupation machine pièce par pièce, pour ne jamais surcharger un poste au détriment d'un autre.</p>
+        <span class="glyph">⚖</span>
+      </div>
+      <div class="pillar reveal">
+        <span class="num">02 — Coût</span>
+        <h3>Prix de revient juste</h3>
+        <p>Calcul du prix unitaire, des minimums de facturation et des quantités économiques en direct, pour que chaque devis reste rentable.</p>
+        <span class="glyph">⚖</span>
+      </div>
+      <div class="pillar reveal">
+        <span class="num">03 — Délai</span>
+        <h3>Engagement client</h3>
+        <p>Indicateurs de fabrication, d'attente et de commande consolidés en une fiche pièce unique, partagée par tout l'atelier.</p>
+        <span class="glyph">⚖</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE 1: Fiche pièce cyclée -->
+<section class="section alt-bg">
+  <div class="wrap">
+    <div class="showcase">
+      <div class="img-col reveal">
+        <div class="img-frame">
+          <img src="img/clipper-pieces-cyclees-decolletage_jpg.webp" alt="Fiche pièce cyclée Mizen Suite en atelier de décolletage">
+        </div>
+        <div class="tag-pill">Fiche Pièce Cyclée — vue atelier</div>
+      </div>
+      <div class="text-col reveal">
+        <span class="eyebrow">Cœur du métier</span>
+        <h3>La fiche pièce, point de bascule de toute la production.</h3>
+        <p>Chaque pièce cyclée porte sa désignation, son prix unitaire, ses indices de plan et de gamme, et son indicateur de fabrication — visible à la fois depuis le bureau d'études et le poste machine.</p>
+        <ul class="check-list">
+          <li>Désignation, code article et code client centralisés sur une seule fiche</li>
+          <li>Prix unitaire, minimum de facturation et quantités économiques ajustables en direct</li>
+          <li>Statuts de fabrication : en attente, en commande, en commande dépôt</li>
+          <li>Photo pièce intégrée pour lever toute ambiguïté à l'atelier</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE 2: Pilotage / dashboard -->
+<section class="section" id="dashboard">
+  <div class="wrap">
+    <div class="showcase reverse">
+      <div class="img-col reveal">
+        <div class="img-frame">
+          <img src="img/abas-erp-kennzahlen-laptop-dashboard-management_png.webp" alt="Tableau de bord de pilotage Mizen Suite">
+        </div>
+        <div class="tag-pill">Tableau de bord — KPI en direct</div>
+      </div>
+      <div class="text-col reveal">
+        <span class="eyebrow">Pilotage</span>
+        <h3>Un tableau de bord qui montre où penche la balance.</h3>
+        <p>Graphiques de répartition, courbes de tendance et indicateurs comparatifs : la direction visualise en un coup d'œil si la production reste équilibrée entre charge, coût et délai — sans extraire un seul fichier Excel.</p>
+        <ul class="check-list">
+          <li>Indicateurs de performance par atelier, par client et par période</li>
+          <li>Répartition visuelle des charges et des coûts de revient</li>
+          <li>Export et partage instantané vers la direction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="section alt-bg" id="modules">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">La suite complète</span>
+      <h2>Tous les modules d'une production équilibrée.</h2>
+      <p>De la fiche pièce au tableau de bord de direction, Mizen Suite couvre l'ensemble de la chaîne — sans rupture entre les services.</p>
+    </div>
+    <div class="modules">
+      <div class="module reveal"><div class="icon">⚙</div><h4>Gestion de production</h4><p>Ordres de fabrication, gammes, cycles et suivi d'atelier en temps réel.</p></div>
+      <div class="module reveal"><div class="icon">📦</div><h4>Stocks &amp; logistique</h4><p>Commandes dépôt, quantités économiques et traçabilité pièce par pièce.</p></div>
+      <div class="module reveal"><div class="icon">💰</div><h4>Coûts &amp; facturation</h4><p>Prix de revient, minimums de facturation, devis et factures liés à la fiche pièce.</p></div>
+      <div class="module reveal"><div class="icon">📊</div><h4>Pilotage &amp; KPI</h4><p>Tableaux de bord direction, indicateurs comparatifs et exports automatisés.</p></div>
+      <div class="module reveal"><div class="icon">🤝</div><h4>Relation client</h4><p>Codes client, historique de commande et engagements de délai centralisés.</p></div>
+      <div class="module reveal"><div class="icon">🛠</div><h4>Bureau d'études</h4><p>Indices de plan, indices de gamme et révisions techniques synchronisés.</p></div>
+      <div class="module reveal"><div class="icon">🔐</div><h4>Accès &amp; sécurité</h4><p>Portail de connexion dédié par site, par rôle et par atelier.</p></div>
+      <div class="module reveal"><div class="icon">🚀</div><h4>Accompagnement projet</h4><p>Déploiement encadré, formation des équipes et support à la mise en service.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN PREVIEW -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Accès sécurisé</span>
+      <h2>Un point d'entrée, toute la suite.</h2>
+      <p>Chaque collaborateur retrouve son atelier, ses indicateurs et ses fiches pièces dès la connexion — sur poste fixe comme en mobilité.</p>
+    </div>
+    <div class="login-preview reveal">
+      <img class="bg" src="img/background_login_image.avif" alt="Portail de connexion Mizen Suite">
+      <div class="login-card">
+        <img src="img/login_logo.jpg" alt="Mizen Suite" style="height:34px;border-radius:6px;">
+        <div class="field"></div>
+        <div class="field"></div>
+        <div class="field-btn">Se connecter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL / CLIENT -->
+<section class="section alt-bg">
+  <div class="wrap">
+    <div class="testimonial reveal">
+      <div class="img-col">
+        <div class="img-frame">
+          <img src="img/proconcept_accompagnement_projet_jpg.webp" alt="Accompagnement projet Mizen Suite">
+        </div>
+      </div>
+      <div>
+        <blockquote>« Depuis Mizen Suite, nos fiches pièces cyclées et nos prix de revient sont enfin sur le même plateau que nos délais clients. L'atelier et la direction parlent le même langage. »</blockquote>
+        <div class="who">
+          <img src="img/sofem-logo.png" alt="SOFEM">
+          <div>
+            <div class="name">SOFEM</div>
+            <span style="font-size:13px;color:#B9BFCB;">Client Mizen Suite — Décolletage de précision</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLAGE / IN ACTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Sur le terrain</span>
+      <h2>Mizen Suite, vu de l'atelier comme du comité de direction.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1.1fr 0.7fr 0.9fr;gap:20px;align-items:center;" class="reveal">
+      <div class="img-frame"><img src="img/1782666633908_image.png" alt="Indicateurs Mizen Suite en réunion"></div>
+      <div class="img-frame"><img src="img/1782666681277_image.png" alt="ERP Mizen Suite sur ordinateur portable"></div>
+      <div class="img-frame"><img src="img/1782666649478_image.png" alt="Réunion projet Mizen Suite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Mettez votre production à l'équilibre.</h2>
+      <p>Échangez 30 minutes avec notre équipe : nous regardons ensemble où penche aujourd'hui votre balance charge / coût / délai.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href="#" class="btn btn-primary">Réserver une démo →</a>
+        <a href="#" class="btn btn-ghost">Parler à un expert</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="img/transparent-MIZEN-logo.png" alt="Mizen Suite" style="filter:none;">
+        <p>L'ERP qui équilibre votre production : charge d'atelier, coût de revient et délai client, sur un seul plateau.</p>
+      </div>
+      <div>
+        <h5>Produit</h5>
+        <ul>
+          <li><a href="#equilibre">L'équilibre Mizen</a></li>
+          <li><a href="#modules">Modules</a></li>
+          <li><a href="#dashboard">Pilotage &amp; KPI</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Entreprise</h5>
+        <ul>
+          <li><a href="#clients">Clients</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Carrières</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#contact">Réserver une démo</a></li>
+          <li><a href="#">support@mizensuite.com</a></li>
+          <li><a href="#">+41 00 000 00 00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mizen Suite. Tous droits réservés.</span>
+      <span>Confidentialité · Conditions d'utilisation</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
